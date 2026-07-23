@@ -1,0 +1,18 @@
+# Generated outputs -- regenerable by running the steps in order with the
+# fixed seeds already in each script. Not versioned to keep the repo small
+# and focused on code; results are reported separately.
+output/
+
+# sbi's internal training-run logs
+sbi-logs/
+
+# Python environment -- never versioned, recreate with requirements.txt
+.venv/
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Word/report documents -- shared separately with the team
+*.docx
