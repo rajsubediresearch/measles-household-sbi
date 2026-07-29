@@ -3,16 +3,27 @@
 Simulation-based inference for a household-community stochastic SEIR model of
 measles transmission, comparing ABC, regression-adjusted ABC, Bayesian
 synthetic likelihood (BSL), and neural posterior estimation (NPE, including
-learned-embedding and ABC-preconditioned variants). Full write-up: shared
-separately as a Word document ("Simulation-Based Inference for a
-Household-Community Measles Transmission Model...").
+learned-embedding and ABC-preconditioned variants), plus a one-at-a-time
+sensitivity sweep across disease natural history and population parameters.
+Full write-up: shared separately as a Word document ("Simulation-Based
+Inference for a Household-Community Measles Transmission Model...").
 
 ## Requirements
 
 - Python >= 3.9
 - `numpy`, `pandas`, `matplotlib`, `scipy`
-- [`episbi`](https://github.com/geunsoojang/EpiSBI) (for Steps 8-13; installed
+- [`episbi`](https://github.com/geunsoojang/EpiSBI) (for Steps 8-14; installed
   in editable mode via `pip install -e .` from a clone of that repository)
+
+## Shared modules
+
+- `hc_model.py` -- parameterised household-community stochastic SEIR
+  simulator and bank-building utilities, factored out of the simulation logic
+  duplicated across Steps 1-7 into a single reusable module. Exposes a
+  `ScenarioConfig` dataclass (population size, household-size distribution,
+  latent/infectious periods, beta_H, beta_C, seed, etc.) so a scenario is an
+  explicit argument rather than a module-level constant. Steps 1-13 do not
+  import this module and are unaffected by it; Step 14 is built on it.
 
 ## Running the pipeline
 
@@ -35,12 +46,22 @@ observed outbreak generated once in Step 1.
 | 11 | `step11_npe_curve_household.py` | Curve LSTM + household summaries vs. hand-picked combined | Step 7 |
 | 12 | `step12_npe_household_learned.py` | Learned household-histogram embedding vs. hand-picked household summaries | Step 7 |
 | 13 | `step13_pnpe_all_representations.py` | ABC-preconditioned NPE across all three representations | Steps 1, 7 |
+| 14 | `step14_sensitivity_sweep.py` | One-at-a-time sensitivity sweep (incubation period, infectious period, beta_H/beta_C split, population size) repeating the curve-only / household-only / combined NPE identifiability contrast across 11 scenarios | `hc_model.py`; independent of Steps 1-13's saved outputs (each scenario regenerates its own population, observed outbreak, and training bank) |
 
 Each script creates its own `output/stepN/` folder with its results (CSVs and
 figures); these are not committed to this repository (see `.gitignore`) since
 they are fully regenerable and the pipeline is deterministic given a fixed
 seed -- confirmed by exact reproduction across independent runs and machines
-during development.
+during development. Step 14 additionally creates one subfolder per scenario,
+`output/step14/<scenario_name>/`, each holding that scenario's own bank,
+per-summary-set posteriors, and recovery table, alongside a pooled
+`step14_sensitivity_summary.csv` and two summary figures at the top level of
+`output/step14/`.
 
-Steps 1-7 need only `numpy`/`pandas`/`matplotlib`/`scipy`. Steps 8-13
+Steps 1-7 need only `numpy`/`pandas`/`matplotlib`/`scipy`. Steps 8-14
 additionally require `episbi` and its dependencies (`torch`, `sbi`).
+
+Step 14 is the slowest step by design (11 scenarios, each simulating its own
+10,000-run training bank and training three separate NPE posteriors) --
+reduce `N_SIM_BANK` and `N_POSTERIOR_SAMPLES` at the top of the script for a
+quick dry run before committing to the full sweep.
