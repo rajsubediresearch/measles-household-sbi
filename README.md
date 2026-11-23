@@ -93,7 +93,7 @@ Full pipeline (Steps 1-14) on two machines, CPU only:
 | Step 14 sensitivity sweep | 29.6 min | 5.1 min |
 | -- bank simulation per scenario | 20-89 s | 5-17 s |
 | -- NPE training per summary set | 14-82 s | 3-10 s |
-| All 14 steps | -- | ~30 min |
+| All 14 steps | not timed | ~30 min |
 
 On the Mac the slowest steps are 10 (LSTM, ~10.5 min), 13 (~6 min),
 14 (~5 min) and 11 (~4.6 min); everything else finishes in under 2 minutes.
