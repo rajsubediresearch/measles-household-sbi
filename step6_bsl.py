@@ -34,10 +34,11 @@
 # from an unparallelised version, exactly as every other seeded-vs-parallel
 # comparison in this project has already shown.
 #
-# Run from E:/APPEX/EpiSBI-main/measles_project/ :
+# Run from /Volumes/ssd/MSI/APPEX/EpiSBI-main/measles_project/ (or anywhere -- the script cd's to its own folder):
 #     python step6_bsl.py
 # ============================================================================
 import os
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__)); os.chdir(_SCRIPT_DIR)  # run from any folder
 from concurrent.futures import ProcessPoolExecutor
 
 import numpy as np

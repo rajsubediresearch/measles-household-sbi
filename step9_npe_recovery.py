@@ -7,10 +7,11 @@
 #   (b) Household only     : #hh affected, mean hh size, frac singletons
 #   (c) Curve + Household  : all six
 #
-# Run from E:/APPEX/EpiSBI-main/measles_project/ :
+# Run from /Volumes/ssd/MSI/APPEX/EpiSBI-main/measles_project/ (or anywhere -- the script cd's to its own folder):
 #     python step9_npe_recovery.py
 # ============================================================================
 import os
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__)); os.chdir(_SCRIPT_DIR)  # run from any folder
 import warnings; warnings.filterwarnings("ignore")
 
 import numpy as np

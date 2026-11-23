@@ -1,0 +1,10 @@
+# Versions used for the macOS run (Nov 2026). Steps 1-7 need only the first
+# five; Steps 8-14 also need torch + sbi and the episbi toolbox, installed from
+# the EpiSBI repository root with:  pip install -e ..
+numpy==2.5.5
+pandas==3.1.1
+scipy==1.18.1
+matplotlib==3.11.2
+scikit-learn==1.9.1
+torch==2.15.0
+sbi==0.27.0

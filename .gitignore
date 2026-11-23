@@ -16,3 +16,7 @@ __pycache__/
 
 # Word/report documents -- shared separately with the team
 *.docx
+
+# Local copies of earlier runs and archives
+output_*/
+output.zip

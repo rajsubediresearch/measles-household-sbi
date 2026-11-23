@@ -10,10 +10,11 @@
 # export_curve_bank_for_python.R) from the earlier hybrid R+Python pipeline
 # -- this is now the single, pure-Python source of NPE training data.
 #
-# Run from E:/APPEX/EpiSBI-main/measles_project/ :
+# Run from /Volumes/ssd/MSI/APPEX/EpiSBI-main/measles_project/ (or anywhere -- the script cd's to its own folder):
 #     python step7_curve_household_bank.py
 # ============================================================================
 import os
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__)); os.chdir(_SCRIPT_DIR)  # run from any folder
 from concurrent.futures import ProcessPoolExecutor
 
 import numpy as np

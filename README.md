@@ -10,8 +10,8 @@ Inference for a Household-Community Measles Transmission Model...").
 
 ## Requirements
 
-- Python >= 3.9
-- `numpy`, `pandas`, `matplotlib`, `scipy`
+- Python >= 3.10
+- `numpy`, `pandas`, `matplotlib`, `scipy`, `scikit-learn` (Step 5)
 - [`episbi`](https://github.com/geunsoojang/EpiSBI) (for Steps 8-14; installed
   in editable mode via `pip install -e .` from a clone of that repository)
 
@@ -50,9 +50,15 @@ observed outbreak generated once in Step 1.
 
 Each script creates its own `output/stepN/` folder with its results (CSVs and
 figures); these are not committed to this repository (see `.gitignore`) since
-they are fully regenerable and the pipeline is deterministic given a fixed
-seed -- confirmed by exact reproduction across independent runs and machines
-during development. Step 14 additionally creates one subfolder per scenario,
+they are fully regenerable from the fixed seeds in each script. Steps 1-7
+(the simulator, ABC, regression adjustment and BSL) and the Step 13 ABC pilot
+and Step 14 training banks reproduce exactly across machines and operating
+systems (confirmed Windows vs macOS). The neural steps (8-14) do not reproduce
+bit-for-bit across machines or torch/sbi versions: network training differs at
+the floating-point level, so posterior medians and interval bounds shift
+slightly (typically by 0.02-0.04, up to ~0.17 in Step 9) while every
+qualitative conclusion is unchanged. Use the pinned versions in
+`requirements.txt` to minimise this. Step 14 additionally creates one subfolder per scenario,
 `output/step14/<scenario_name>/`, each holding that scenario's own bank,
 per-summary-set posteriors, and recovery table, alongside a pooled
 `step14_sensitivity_summary.csv` and two summary figures at the top level of
@@ -65,3 +71,30 @@ Step 14 is the slowest step by design (11 scenarios, each simulating its own
 10,000-run training bank and training three separate NPE posteriors) --
 reduce `N_SIM_BANK` and `N_POSTERIOR_SAMPLES` at the top of the script for a
 quick dry run before committing to the full sweep.
+
+## Running on macOS
+
+`run_all_mac.sh` creates a native Python environment (`../.venv_mac`), installs
+the pinned requirements plus `episbi` in editable mode, and runs any range of
+steps while logging per-step wall time to `output/mac_timing_<date>.csv`:
+
+    bash run_all_mac.sh          # setup (first time) + Steps 1-14
+    bash run_all_mac.sh 9 9      # Step 9 only
+
+Each script `cd`s to its own folder on start-up, so it can also be run directly
+(`python step9_npe_recovery.py`) from any working directory.
+
+## Runtime
+
+Full pipeline (Steps 1-14) on two machines, CPU only:
+
+| | Windows laptop (MSI, 21 workers) | Mac mini M6 (12 cores, 11 workers) |
+|---|---|---|
+| Step 14 sensitivity sweep | 29.6 min | 5.1 min |
+| -- bank simulation per scenario | 20-89 s | 5-17 s |
+| -- NPE training per summary set | 14-82 s | 3-10 s |
+| All 14 steps | -- | ~30 min |
+
+On the Mac the slowest steps are 10 (LSTM, ~10.5 min), 13 (~6 min),
+14 (~5 min) and 11 (~4.6 min); everything else finishes in under 2 minutes.
+The Mac run was done from an external SSD with no slowdown.

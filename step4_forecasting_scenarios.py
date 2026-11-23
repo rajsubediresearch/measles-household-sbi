@@ -9,10 +9,11 @@
 #   - For each vaccination-coverage scenario, simulate one outbreak per pair.
 #   - The spread of outcomes = parameter uncertainty + stochastic uncertainty.
 #
-# Run from E:/APPEX/EpiSBI-main/measles_project/ :
+# Run from /Volumes/ssd/MSI/APPEX/EpiSBI-main/measles_project/ (or anywhere -- the script cd's to its own folder):
 #     python step4_forecasting_scenarios.py
 # ============================================================================
 import os
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__)); os.chdir(_SCRIPT_DIR)  # run from any folder
 from concurrent.futures import ProcessPoolExecutor
 
 import numpy as np

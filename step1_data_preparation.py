@@ -19,10 +19,11 @@
 #        Level 3: full line list (one row per case)
 #   4. Saves the true parameters so later steps can check recovery.
 #
-# Run from E:/APPEX/EpiSBI-main/measles_project/ :
+# Run from /Volumes/ssd/MSI/APPEX/EpiSBI-main/measles_project/ (or anywhere -- the script cd's to its own folder):
 #     python step1_data_preparation.py
 # ============================================================================
 import os
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__)); os.chdir(_SCRIPT_DIR)  # run from any folder
 import numpy as np
 import pandas as pd
 import matplotlib; matplotlib.use("Agg")
