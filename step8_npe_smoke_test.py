@@ -9,7 +9,7 @@
 # not our household-community simulator. Purely a "does the tool work"
 # check before Steps 9+ trust it on our data.
 #
-# Run from /Volumes/ssd/MSI/APPEX/EpiSBI-main/measles_project/ (or anywhere -- the script cd's to its own folder):
+# Run from the measles_project folder (or anywhere -- the script cd's to its own folder):
 #     python step8_npe_smoke_test.py
 # ============================================================================
 import os

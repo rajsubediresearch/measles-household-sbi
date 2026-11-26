@@ -13,7 +13,7 @@
 # Expectation: beta_H goes from flat (curve only) -> peaked (with households),
 #              while beta_C stays sharp throughout.
 #
-# Run from /Volumes/ssd/MSI/APPEX/EpiSBI-main/measles_project/ (or anywhere -- the script cd's to its own folder):
+# Run from the measles_project folder (or anywhere -- the script cd's to its own folder):
 #     python step3_identifiability_experiment.py
 # ============================================================================
 import os

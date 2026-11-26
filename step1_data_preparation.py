@@ -19,7 +19,7 @@
 #        Level 3: full line list (one row per case)
 #   4. Saves the true parameters so later steps can check recovery.
 #
-# Run from /Volumes/ssd/MSI/APPEX/EpiSBI-main/measles_project/ (or anywhere -- the script cd's to its own folder):
+# Run from the measles_project folder (or anywhere -- the script cd's to its own folder):
 #     python step1_data_preparation.py
 # ============================================================================
 import os

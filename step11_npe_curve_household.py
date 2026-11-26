@@ -6,7 +6,7 @@
 #   (A) hand-picked curve + household summaries (Step 9's combined result)
 #   (B) curve LSTM + hand-picked household summaries (NEW combination)
 #
-# Run from /Volumes/ssd/MSI/APPEX/EpiSBI-main/measles_project/ (or anywhere -- the script cd's to its own folder):
+# Run from the measles_project folder (or anywhere -- the script cd's to its own folder):
 #     python step11_npe_curve_household.py
 # ============================================================================
 import os

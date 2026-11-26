@@ -17,7 +17,7 @@
 # trainings gave one representation an unlucky initialisation depending on
 # what ran before it). Fixed here from the start.
 #
-# Run from /Volumes/ssd/MSI/APPEX/EpiSBI-main/measles_project/ (or anywhere -- the script cd's to its own folder):
+# Run from the measles_project folder (or anywhere -- the script cd's to its own folder):
 #     python step13_pnpe_all_representations.py
 # ============================================================================
 import os

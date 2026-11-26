@@ -9,7 +9,7 @@
 #   - For each vaccination-coverage scenario, simulate one outbreak per pair.
 #   - The spread of outcomes = parameter uncertainty + stochastic uncertainty.
 #
-# Run from /Volumes/ssd/MSI/APPEX/EpiSBI-main/measles_project/ (or anywhere -- the script cd's to its own folder):
+# Run from the measles_project folder (or anywhere -- the script cd's to its own folder):
 #     python step4_forecasting_scenarios.py
 # ============================================================================
 import os

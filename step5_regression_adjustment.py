@@ -18,7 +18,7 @@
 # inside the prior bounds) using Epanechnikov kernel weights (points closer
 # to the observed summaries count more in the regression fit).
 #
-# Run from /Volumes/ssd/MSI/APPEX/EpiSBI-main/measles_project/ (or anywhere -- the script cd's to its own folder):
+# Run from the measles_project folder (or anywhere -- the script cd's to its own folder):
 #     python step5_regression_adjustment.py
 # ============================================================================
 import os

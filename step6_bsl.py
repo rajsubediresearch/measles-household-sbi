@@ -34,7 +34,7 @@
 # from an unparallelised version, exactly as every other seeded-vs-parallel
 # comparison in this project has already shown.
 #
-# Run from /Volumes/ssd/MSI/APPEX/EpiSBI-main/measles_project/ (or anywhere -- the script cd's to its own folder):
+# Run from the measles_project folder (or anywhere -- the script cd's to its own folder):
 #     python step6_bsl.py
 # ============================================================================
 import os
